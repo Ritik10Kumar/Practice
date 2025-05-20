@@ -1,3 +1,4 @@
+//clouser functionality
 function createCounter() {
     let count = 0;  // private variable
   
