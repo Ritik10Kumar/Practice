@@ -1,52 +1,3 @@
-// // these functions are defined globally thats why we can use it inside function
-// var x = 90
-// let y = 80
-// const z = 70
-
-// function help(){
-//     console.log(x,y,z," == hello yello")
-// }
-// console.log(help()) // there is undefined in output along with 90,80,70 because It first executes help(), which logs 90 80 70 == hello yello.
-// // Then console.log() prints the return value of help() → which is undefined.
-
-
-
-
-// // Global Scope
-// var a = 1;
-// let b = 2;
-// const c = 3;
-
-// function testScope() {
-//     var a = 10; // function-scoped
-//     let b = 20; // block-scoped
-//     const c = 30;
-
-//     if (true) { //this if condition will be true always and the code inside will execute always
-//         var a = 100;  // still function-scoped!
-//         let b = 200;  // new block-scoped variable
-//         const c = 300; // new block-scoped constant
-//         a = 8000
-//         b = 500
-//         console.log("Inside if block:", a, b, c); // 100 200 300
-//     }
-
-//     console.log("Inside function:", a, b, c); // 100 20 30
-// }
-
-// testScope();
-
-// console.log("Outside function:", a, b, c); // 1 2 3
-
-
-// let e = 5
-// {
-//     let e = 3
-//     console.log(e,"inside")
-// }
-
-// console.log(e,"outside")
-
 
 // // call bind apply
 
@@ -65,30 +16,17 @@ let xobject = {
 
 xobject.printfulname()
 
-// person={
-//     name:"amit",
-//     lastname:"pal"
-// }
-
-
-// xobject.printfulname.call(person,'meerut') 
-// xobject.printfulname.apply(person, ["Mumbai"]); // Takes argument in array
-// let bindfunc =  xobject.printfulname.bind(person, "MEerut"); //same as call method but return a function 
-// bindfunc()
-var x = 89
-let y = 78
-const z = 56
-function testLet() {
-    y = 45
-    if (true) {
-        let y = 20;
-    }
-    console.log(z, "this is z", y, "this is y"); // ❌ ReferenceError
+let person={
+    name:"swati",
+    lastname:"sukla",
+    age:"23"
 }
 
-testLet()
 
-
+xobject.printfulname.call(person,'meerut') 
+xobject.printfulname.apply(person, ["Mumbai"]); // Takes argument in array
+let bindfunc =  xobject.printfulname.bind(person, "MEerut"); //same as call method but return a function 
+bindfunc()
 
 function printmsg(msg, times) {
     let delay = 0
@@ -100,7 +38,7 @@ function printmsg(msg, times) {
     }
 }
 
-// printmsg("help",5)
+printmsg("help",5)
 
 let number = [1, 2, 3, 5, 6, 7]
 
@@ -157,7 +95,7 @@ function sortArry(arr) {
 number = [5, 2, 3, 1, 5, 7]
 
 x = sortArry(number)
-console.log(x)
+console.log(x,"this is sortArry function")
 
 
 function maxChar(str) {
@@ -182,7 +120,7 @@ function maxChar(str) {
         maxChar = currenctChar
     }
 
-    console.log(`maxchar ${maxChar} maxCharcput ${maxCharCount}`)
+    console.log(`maxchar ${maxChar} maxCharcput ${maxCharCount} this is maxChar function`)
 
 }
 
@@ -201,25 +139,6 @@ function twoSum(arr, target) {
     }
 
 }
-
-
-// function maxSubarraysum(arr){
-//     let mxSum = -Infinity
-//     currenctsum = 0
-//     for(let i = 0;i<arr.length;i++){
-//         currenctsum += arr[i]
-//         if(currenctsum > mxSum){
-//             mxSum = currenctsum
-//         }
-//         if(currenctsum < 0){
-//             mxSum = 0
-//         }
-//     }
-//     console.log(mxSum,"lkllkk")
-// }
-
-
-// maxSubarraysum(number)
 
 
 function maxSubarr(arr) {
@@ -248,7 +167,7 @@ function maxSubarr(arr) {
 }
 
 
-x = maxSubarr([2, 3, -8, 7, -1, 2, 3])
+x = maxSubarr([2, 3, -8, 7, -1, 2, 3,-6])
 console.log(x, "this is maxSubarr")
 
 
@@ -276,28 +195,6 @@ console.log(x, ']][][]')
 
 
 
-// function checkbracket(str){
-// let stack = []
-// let map = {
-//     '(':')',
-//     '[':']',
-//     '{':'}'
-// }
-
-// for(let char of str){
-//     if(map[char]){
-//         stack.push(map[char])
-//     }else{
-//         if(char !== stack.pop()){
-//             return false
-//         }
-//     }
-// }
-
-// return stack.length === 0
-// }
-
-// console.log(checkbracket("({[]}[])"),"this is brackets"); // true
 
 
 
@@ -327,13 +224,13 @@ function areBracketsBalanced(str) {
 console.log(areBracketsBalanced("({[]}[])"), "this is areBracketsBalanced");
 
 
-const person = {
-    name: "Ritik",
-    meta: {
-        age: 22,
-    }
-};
-person.self = person; // circular reference
+// const person = {
+//     name: "Ritik",
+//     meta: {
+//         age: 22,
+//     }
+// };
+// person.self = person; // circular reference
 
 //   const clone = deepCopy(person);
 
@@ -352,52 +249,6 @@ const patients = [
     { id: 5, admitdate: '18-03-2024', disChargeDate: '28-03-2024' },
     { id: 6, admitdate: '25-03-2024', disChargeDate: '30-03-2024' },
 ];
-
-// Helper to convert date string to Date object
-//   function parseDate(dateStr) {
-//     const [day, month, year] = dateStr.split('-').map(Number);
-//     return new Date(year, month - 1, day);
-//   }
-
-//   // Helper to format Date to dd-mm-yyyy
-//   function formatDate(date) {
-//     return date.toISOString().split('T')[0].split('-').reverse().join('-');
-//   }
-
-//   // Timeline of events: {dateStr: change}
-//   function findmaxPatient(arr){
-//   const events = {};
-
-//   patients.forEach(p => {
-//     const admit = parseDate(p.admitdate);
-//     const discharge = parseDate(p.disChargeDate);
-//     const nextDay = new Date(discharge);
-//     nextDay.setDate(discharge.getDate() + 1);
-
-//     const aKey = admit.toISOString();
-//     const dKey = nextDay.toISOString();
-
-//     events[aKey] = (events[aKey] || 0) + 1;
-//     events[dKey] = (events[dKey] || 0) - 1;
-//   });
-
-//   // Process events to find date with max patients
-//   const sortedDates = Object.keys(events).sort();
-//   let maxPatients = 0;
-//   let currentPatients = 0;
-//   let maxDate = null;
-
-//   sortedDates.forEach(dateStr => {
-//     currentPatients += events[dateStr];
-//     if (currentPatients > maxPatients) {
-//       maxPatients = currentPatients;
-//       maxDate = new Date(dateStr);
-//     }
-//   });
-
-//   console.log("📅 Date with maximum patients:", formatDate(maxDate));
-//   console.log("👥 Maximum number of patients:", maxPatients);
-// }
 
 
 function parseDate(dateStr) {
@@ -651,5 +502,51 @@ function productExceptItself(nums) {
 
 input = [1,2,3,4]
 output = productExceptItself(input)
-console.log(output)
+console.log(output,"][][outpt")
 
+
+//prototype inheritance
+const animal = {
+    eat:true,
+    walk(){
+        console.log("animals can walk")
+    },
+    tail:function(){
+        console.log("animals have tail")
+    }
+}
+
+const dog = {
+    voice:function(){
+console.log("dog can bark")
+    }
+    
+}
+
+
+dog.__proto__ = animal
+
+console.log(dog.eat)
+dog.tail()
+
+
+
+
+//find pivot index
+
+input = [1,7,3,6,5,6]
+var pivotIndex = function(nums) {
+    const totalSum = nums.reduce((acc, num) => acc + num, 0);
+    let leftSum = 0
+
+    for(let i = 0;i<nums.length;i++){
+        if(leftSum === totalSum - leftSum - nums[i]){
+            return i
+        }
+        leftSum += nums[i]
+    }
+    return -1
+
+};
+
+console.log(pivotIndex(input),"]][[]input")

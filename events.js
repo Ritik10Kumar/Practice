@@ -1,15 +1,15 @@
-// // const { listenerCount } = require('events')
+const { listenerCount } = require('events')
 // const { subscribe } = require('diagnostics_channel')
-// const EventEmitter = require('events')
+const EventEmitter = require('events')
 // const { findSourceMap } = require('module')
 // const { setTimeout } = require('timers/promises')
 // const { queryObjects } = require('v8')
 
-// const eventEmitter = new EventEmitter()
+const eventEmitter = new EventEmitter()
 
-// eventEmitter.on('GREET',(name)=>{
-// console.log(`Hello ${name}`)
-// })
+eventEmitter.on('GREET',(name)=>{
+console.log(`Hello ${name}`)
+})
 
 
 // eventEmitter.once('onlyonce',(name)=>{
@@ -22,7 +22,7 @@
 // eventEmitter.on('deleteevent',deleteevent)
 
 // eventEmitter.emit('onlyonce','master')
-// eventEmitter.emit('GREET','ritik')
+eventEmitter.emit('GREET','ritik')
 // eventEmitter.emit('onlyonce','master2')
 // eventEmitter.removeListener('deleteevent',deleteevent)
 // eventEmitter.emit('deleteevent')    
@@ -623,7 +623,7 @@
 
 // console.log(findPeakElement(arr))
 
-nums =[5,7,7,8,8,10]
+nums =[5,8,7,8,8,10]
 target = 8
 function searchRange(nums, target) {
   if(nums.length === 0){
@@ -633,17 +633,14 @@ function searchRange(nums, target) {
   for(let i = 0;i<nums.length;i++){
       if(nums[i] === target){ 
           arr.push(i)
-      }else{
-          return [-1,-1]
       }
   }
   return arr
 };
 
+let  acv = searchRange(nums,target)
 
-a = searchRange(nums,target)
-
-console.log(a,"this is a")
+console.log(acv,"this is acv")
 
 function increasingTriplet(nums){
 
@@ -663,20 +660,7 @@ function increasingTriplet(nums){
     
     return false;
 
-    // let i = nums[0]
-    // let j = nums[1]
-    // let k = nums[2]
-    // for(let a = 0 ;a<nums.length;a++){
-    //     if(i<j && j<k){
-    //         console.log('this is true')
-    //         return true
-    //     }
-    //     i = nums[0+a]
-    //     j = nums[1+a]
-    //     k = nums[2+a]
-    // } 
-
-    // return false 
+  
 }
 x = increasingTriplet([20,100,10,12,5,13])
 console.log(x)
