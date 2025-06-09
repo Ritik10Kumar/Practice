@@ -550,3 +550,44 @@ var pivotIndex = function(nums) {
 };
 
 console.log(pivotIndex(input),"]][[]input")
+
+
+
+function SumOfFebonnaci(n){
+    //sum of n elements of febonnaci series
+    let a = 0 
+    let b = 1
+    let sum = a+b
+    for(let i = 2;i<n;i++){
+        let next = a+b
+        sum += next
+        a= b
+        b = next
+    }
+return sum
+}
+
+output = SumOfFebonnaci(5)
+console.log(output,"SumOfFebonnaci")
+
+
+// function febonnaci(){
+//     let n = 10
+//     let a= 0 
+//     let b = 1
+//     for(let i = 0;i<n;i++){
+//         [a,b] = [b,a+b]
+//     }
+// }
+
+
+function fibonacciIterative(n) {
+    let a = 0, b = 1;
+    console.log("Fibonacci Series (Iterative):");
+    for (let i = 0; i < n; i++) {
+        console.log(a);
+        [a, b] = [b, a + b];
+    }
+}
+
+fibonacciIterative(10);
