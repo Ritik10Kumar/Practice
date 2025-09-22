@@ -84,14 +84,61 @@
 // console.log([...n],"arr2")
 
 
-var a = 1
-if(true){
-  a = 2
-  console.log(a)
-  if(true){
-  let a = 3
-  console.log(a)
-  }
+function createCounter() {
+    let count = 0;  // private variable
+
+    return function () {
+        count++;
+        console.log("Current count:", count);
+    };
 }
 
-console.log(a)
+const counter = createCounter();
+
+// counter(); // Output: Current count: 1
+// counter(); // Output: Current count: 2
+// counter(); // Output: Current count: 3
+
+let newcount = counter
+
+newcount()
+
+
+
+
+// const original = {
+//   name: "Ritik",
+//   address: {
+//     city: "Delhi"
+//   }
+// };
+
+// const shallowCopy = { ...original }; // or Object.assign({}, original)
+
+// shallowCopy.name = "John";
+// shallowCopy.address.city = "Mumbai";
+
+// console.log(shallowCopy.address.city)
+
+
+const original = {
+  name: "Ritik",
+  address: {
+    city: "Delhi"
+  }
+};
+
+const deepCopy = structuredClone(original); // Node.js / modern browsers
+
+deepCopy.address.city = "Mumbai";
+
+console.log(original.address.city);
+
+
+
+const map = new Map();
+map.set("name", "Ritik");
+map.set({ a: 1 }, "objValue");
+
+console.log(map.get("name"));     // "Ritik"
+console.log(map.get({a:1})); 

@@ -345,3 +345,31 @@ SELECT name, salary,
        CUME_DIST() OVER (ORDER BY salary) AS percentile,
        PERCENT_RANK() OVER (ORDER BY salary) AS relative_rank
 FROM employees;
+
+
+
+
+
+CREATE TABLE Organizers (
+    organizer_id INT PRIMARY KEY,
+    organizer_name VARCHAR(255) NOT NULL
+);
+
+
+-- CREATE TABLE Events (
+--     event_id INT PRIMARY KEY,
+--     event_name VARCHAR(255) NOT NULL,
+--     organizer_id INT,
+--     FOREIGN KEY (organizer_id) REFERENCES Organizers(organizer_id)
+-- );
+
+
+
+-- -- Organizers Table
+-- INSERT INTO Organizers (organizer_id, organizer_name) VALUES (1, 'TechCorp Events'), (2, 'Community Hub');
+-- INSERT INTO Events (event_id, event_name, organizer_id) VALUES (101, 'Annual Tech Summit', 1), (102, 'Local Meetup', 2), (103, 'Dev Workshop', 1);
+
+-- -- select * from Events where 
+
+
+-- select * from Events e join Organizers o on o.organizer_id = e.organizer_id where o.organizer_name like '%Community%';

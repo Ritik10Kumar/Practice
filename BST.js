@@ -280,23 +280,404 @@ console.log(findPeakElement(arr))
 
 
 
+// BST Questions 
+
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = this.right = null;
+  }
+}
+
+
+function buildSampleTree() {
+  let root = new TreeNode(5);
+  root.left = new TreeNode(3);
+  root.right = new TreeNode(7);
+  root.left.left = new TreeNode(2);
+  root.left.right = new TreeNode(4);
+  root.right.right = new TreeNode(8);
+  return root;
+}
+
+
+
+// Insert a Node in BST
+
+function insertBST(root, key) {
+  if (!root) return new TreeNode(key);
+
+  if (key < root.val) {
+    root.left = insertBST(root.left, key);
+  } else {
+    root.right = insertBST(root.right, key);
+  }
+  return root;
+}
+
+let root = buildSampleTree();
+insertBST(root, 6);
+// Now 6 will be added as left of 7
+
+
+// Search in BST
+
+function searchBST(root, key) {
+  if (!root || root.val === key) return root;
+
+  if (key < root.val) return searchBST(root.left, key);
+  return searchBST(root.right, key);
+}
+
+searchBST(root, 4);
+
+// Inorder, Preorder, Postorder Traversal
+
+function inorder(root) {
+  if (!root) return;
+  inorder(root.left);
+  console.log(root.val);
+  inorder(root.right);
+}
+
+function preorder(root) {
+  if (!root) return;
+  console.log(root.val);
+  preorder(root.left);
+  preorder(root.right);
+}
+
+function postorder(root) {
+  if (!root) return;
+  postorder(root.left);
+  postorder(root.right);
+  console.log(root.val);
+}
+
+
+inorder(root); // prints 2 3 4 5 6 7 8
+
+
+// Find Minimum / Maximum Value in BST
+
+function findMin(root) {
+  while (root.left) root = root.left;
+  return root;
+}
+
+function findMax(root) {
+  while (root.right) root = root.right;
+  return root;
+}
+
+
+console.log(findMin(root).val); // 2
+console.log(findMax(root).val); // 8
+
+// Delete Node in BST
+
+function deleteNode(root, key) {
+  if (!root) return null;
+
+  if (key < root.val) {
+    root.left = deleteNode(root.left, key);
+  } else if (key > root.val) {
+    root.right = deleteNode(root.right, key);
+  } else {
+    // Node found
+    if (!root.left) return root.right;
+    if (!root.right) return root.left;
+
+    let minNode = findMin(root.right);
+    root.val = minNode.val;
+    root.right = deleteNode(root.right, minNode.val);
+  }
+  return root;
+}
+
+deleteNode(root, 3); // deletes 3 and rearranges tree
+inorder(root); // prints 2 4 5 6 7 8
+
+// Validate BST
+
+function isValidBST(root, min = -Infinity, max = Infinity) {
+  if (!root) return true;
+
+  if (root.val <= min || root.val >= max) return false;
+
+  return (
+    isValidBST(root.left, min, root.val) &&
+    isValidBST(root.right, root.val, max)
+  );
+}
+
+console.log(isValidBST(root)); // true
+
+
+// Lowest Common Ancestor in BST
+function lowestCommonAncestor(root, p, q) {
+  if (p.val < root.val && q.val < root.val)
+    return lowestCommonAncestor(root.left, p, q);
+  else if (p.val > root.val && q.val > root.val)
+    return lowestCommonAncestor(root.right, p, q);
+  else
+    return root;
+}
+
+let p = root.left.left;  // Node with val 2
+let q = root.left.right; // Node with val 4
+console.log(lowestCommonAncestor(root, p, q).val); // 3
+
+// Kth Smallest in BST
+
+function kthSmallest(root, k) {
+  let count = 0;
+  let result = null;
+
+  function inorder(node) {
+    if (!node || result !== null) return;
+
+    inorder(node.left);
+    count++;
+    if (count === k) {
+      result = node.val;
+      return;
+    }
+    inorder(node.right);
+  }
+
+  inorder(root);
+  return result;
+}
+
+
+console.log(kthSmallest(root, 3)); // 4
+
+// BST to Sorted Doubly Linked List
+
+function bstToDLL(root) {
+  let prev = null, head = null;
+
+  function convert(node) {
+    if (!node) return;
+    convert(node.left);
+
+    if (prev) {
+      prev.right = node;
+      node.left = prev;
+    } else {
+      head = node;
+    }
+    prev = node;
+
+    convert(node.right);
+  }
+
+  convert(root);
+  return head;
+}
+
+let head = bstToDLL(root);
+while (head) {
+  console.log(head.val);
+  head = head.right;
+}
+
+
+
+// Convert Sorted Array to BST
+
+function sortedArrayToBST(nums) {
+  if (!nums.length) return null;
+
+  const mid = Math.floor(nums.length / 2);
+  const root = new TreeNode(nums[mid]);
+
+  root.left = sortedArrayToBST(nums.slice(0, mid));
+  root.right = sortedArrayToBST(nums.slice(mid + 1));
+  return root;
+}
+
+
+
+
+let arrtosort = [1, 2, 3, 4, 5];
+let newRoot = sortedArrayToBST(arrtosort);
+inorder(newRoot); // prints 1 2 3 4 5
+
+
+// Inorder Successor in BST
+
+function inorderSuccessor(root, p) {
+  let succ = null;
+
+  while (root) {
+    if (p.val < root.val) {
+      succ = root;
+      root = root.left;
+    } else {
+      root = root.right;
+    }
+  }
+
+  return succ;
+}
+
+p = root.left; // node 3
+console.log(inorderSuccessor(root, p).val); // 4
+
+// Recover BST (Two nodes swapped)
+
+function recoverTree(root) {
+  let x = null, y = null, prev = null;
+
+  function inorder(node) {  
+    if (!node) return;
+    inorder(node.left);
+
+    if (prev && node.val < prev.val) {
+      y = node;
+      if (!x) x = prev;
+    }
+    prev = node;
+
+    inorder(node.right);
+  }
+
+  inorder(root);
+
+  // Swap x and y
+  [x.val, y.val] = [y.val, x.val];
+}
+
+
+
+
+
+// Serialize and Deserialize BST
+
+function serialize(root) {
+  const res = [];
+
+  function preorder(node) {
+    if (!node) return;
+    res.push(node.val);
+    preorder(node.left);
+    preorder(node.right);
+  }
+
+  preorder(root);
+  return res.join(',');
+}
+
+function deserialize(data) {
+  if (!data) return null;
+
+  const values = data.split(',').map(Number);
+  let i = 0;
+
+  function build(min, max) {
+    if (i === values.length || values[i] < min || values[i] > max)
+      return null;
+
+    let val = values[i++];
+    let node = new TreeNode(val);
+    node.left = build(min, val);
+    node.right = build(val, max);
+    return node;
+  }
+
+  return build(-Infinity, Infinity);
+}
+
+
+
+let s = serialize(root);
+console.log(s); // "5,3,2,4,7,6,8"
+
+let newTree = deserialize(s);
+inorder(newTree); // prints 2 3 4 5 6 7 8
 
 
 
 
 
 
+// Trim BST in Range [L, R]
+
+function trimBST(root, low, high) {
+  if (!root) return null;
+
+  if (root.val < low) return trimBST(root.right, low, high);
+  if (root.val > high) return trimBST(root.left, low, high);
+
+  root.left = trimBST(root.left, low, high);
+  root.right = trimBST(root.right, low, high);
+  return root;
+}
+
+
+
+let trimmed = trimBST(root, 4, 7);
+inorder(trimmed); // 4 5 6 7
+
+
+
+//  Range Sum of BST
+
+function rangeSumBST(root, low, high) {
+  if (!root) return 0;
+
+  if (root.val < low) return rangeSumBST(root.right, low, high);
+  if (root.val > high) return rangeSumBST(root.left, low, high);
+
+  return (
+    root.val +
+    rangeSumBST(root.left, low, high) +
+    rangeSumBST(root.right, low, high)
+  );
+}
 
 
 
 
 
+console.log(rangeSumBST(root, 4, 7)); // 4 + 5 + 6 + 7 = 22
 
 
+// BST Iterator
+
+class BSTIterator {
+  constructor(root) {
+    this.stack = [];
+    this._leftmostInorder(root);
+  }
+
+  _leftmostInorder(node) {
+    while (node) {
+      this.stack.push(node);
+      node = node.left;
+    }
+  }
+
+  next() {
+    let node = this.stack.pop();
+    if (node.right) this._leftmostInorder(node.right);
+    return node.val;
+  }
+
+  hasNext() {
+    return this.stack.length > 0;
+  }
+}
+    
 
 
-
-
+let iter = new BSTIterator(root);
+while (iter.hasNext()) {
+  console.log(iter.next());
+}
+// 2 3 4 5 6 7 8 (inorder sequence)
 
 
 
